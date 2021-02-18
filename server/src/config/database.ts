@@ -3,13 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const {
-    MONGO_INITDB_ROOT_USERNAME,
-    MONGO_INITDB_ROOT_PASSWORD,
-    DATABASE,
-    DATABASE_PORT,
-    DATABASE_HOST,
-} = process.env;
+const { MONGO_INITDB_ROOT_USERNAME, MONGO_INITDB_ROOT_PASSWORD, DATABASE, DATABASE_PORT, DATABASE_HOST } = process.env;
 
 const databaseUrl: string = `mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE}`;
 

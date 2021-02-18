@@ -1,7 +1,7 @@
 import { IMovie, IUser } from '../types';
 import { SystemError } from '../types/enums';
 import movieHelper from '../helpers/movieHelper';
-import { Movie, IMovieDocument } from '../models/Movie';
+import { IMovieDocument, Movie } from '../models/Movie';
 import { IMovieDTO } from '../dto';
 
 const movieService = {
