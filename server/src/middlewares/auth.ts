@@ -6,6 +6,7 @@ import { Movie } from '../models/Movie';
 import { SystemError, UserRole } from '../types/enums';
 import newCleanDateBuilder from '../utils/cleanDateBuilder';
 import { MONTH_LIMIT_BASIC_USER } from '../constansts';
+import { CustomError } from '../utils/CustomError';
 
 dotenv.config();
 
@@ -20,12 +21,8 @@ export const authBearerTokenMiddleware = passport
                 jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             },
             async (jwtPayload: IJwt, done: VerifiedCallback) => {
-                try {
-                    const user: IUser = { ...jwtPayload };
-                    done(null, user);
-                } catch (err) {
-                    done(err);
-                }
+                const user: IUser = { ...jwtPayload };
+                done(null, user);
             },
         ),
     )
@@ -33,7 +30,7 @@ export const authBearerTokenMiddleware = passport
 
 export const checkRoles = async (req: RequestBody<any>, res: any, next: any) => {
     if (!req.user) {
-        throw { name: SystemError.Unauthorized, message: SystemError.Unauthorized };
+        next(new CustomError(SystemError.Unauthorized, SystemError.Unauthorized));
     }
     const newMovieCreateDate: Date = new Date(Date.now());
     const start: Date = newCleanDateBuilder(newMovieCreateDate);
@@ -52,5 +49,6 @@ export const checkRoles = async (req: RequestBody<any>, res: any, next: any) => 
     if (numberOfUserMovies < MONTH_LIMIT_BASIC_USER) {
         return next();
     }
-    next(new Error(`User ${name} with ${role} account can add only 5 movies on month`));
+
+    next(new CustomError(SystemError.Forbidden, `User ${name} with ${role} account can add only 5 movies on month`));
 };
