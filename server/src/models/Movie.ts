@@ -1,7 +1,9 @@
 import { Model, model, Schema, Document } from 'mongoose';
 import { IMovie } from '../types';
 
-export interface IMovieDocument extends Document, IMovie {}
+export interface IMovieDocument extends Document, IMovie {
+    userId: number;
+}
 
 export interface IMovieModel extends Model<IMovieDocument> {}
 
@@ -19,7 +21,7 @@ const movieSchema = new Schema(
             trim: true,
         },
         genre: { type: String, trim: true },
-        directory: { type: String, trim: true },
+        director: { type: String, trim: true },
     },
     { timestamps: true },
 );

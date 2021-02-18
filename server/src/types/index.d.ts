@@ -4,11 +4,10 @@ import { Schema } from 'mongoose';
 export type idType = string | Schema.Types.ObjectId | undefined;
 
 export interface IMovie {
-    userId: number;
     title: string;
     released: Date;
     genre: string;
-    directory: string;
+    director: string;
 }
 
 export interface IUser {

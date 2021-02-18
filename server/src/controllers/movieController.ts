@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
-import { IUser, RequestBody } from '../types';
-import { IBookCreateDTO } from '../dto';
+import { RequestBody } from '../types';
+import { IMovieCreateDTO, IMovieDTO } from '../dto';
 import movieService from '../services/movieService';
 import { HttpStatus } from '../types/enums';
 
 const movieController = {
-    createNewUserMoviePOST: async (req: RequestBody<IBookCreateDTO>, res: Response) => {
-        await movieService.createNewBook(req.user, req.body.title);
-        res.status(HttpStatus.Created).send('Hello from POST');
+    createNewUserMoviePOST: async (req: RequestBody<IMovieCreateDTO>, res: Response) => {
+        const newMovie: IMovieDTO = await movieService.createNewBook(req.user, req.body.title);
+        res.status(HttpStatus.Created).send(newMovie);
     },
 
     allUserMoviesGET: (req: Request, res: Response) => {
