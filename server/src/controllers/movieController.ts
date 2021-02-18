@@ -4,6 +4,7 @@ const movieController = {
     createNewUserMoviePOST: (req: Request, res: Response) => {
         res.send('Hello from POST');
     },
+
     allUserMoviesGET: (req: Request, res: Response) => {
         res.send('Hello from GET');
     },
