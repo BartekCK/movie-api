@@ -1,7 +1,7 @@
 import { IMovie, IUser } from '../types';
 import { SystemError } from '../types/enums';
 import movieHelper from '../helpers/movieHelper';
-import Movie, { IMovieDocument } from '../models/Movie';
+import { Movie, IMovieDocument } from '../models/Movie';
 import { IMovieDTO } from '../dto';
 
 const movieService = {
@@ -20,7 +20,7 @@ const movieService = {
         if (movies.length === 0) {
             throw { name: SystemError.NotFound, message: `User by Id ${userId} don't have any movies` };
         }
-        return movies.map((movie: IMovieDocument) => ({...movie.toObject()} as IMovieDTO));
+        return movies.map((movie: IMovieDocument) => ({ ...movie.toObject() } as IMovieDTO));
     },
 };
 

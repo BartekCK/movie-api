@@ -1,4 +1,4 @@
-import { Model, model, Schema, Document } from 'mongoose';
+import { Model, model, Schema, Document, HookNextFunction } from 'mongoose';
 import { IMovie } from '../types';
 
 export interface IMovieDocument extends Document, IMovie {
@@ -26,4 +26,10 @@ const movieSchema = new Schema(
     { timestamps: { createdAt: true, updatedAt: false } },
 );
 
-export default model<IMovieDocument, IMovieModel>('movies', movieSchema);
+movieSchema.pre<IMovieDocument>('save', async function (next: HookNextFunction) {
+    const data = await Movie.find({ userId: this.userId }).exec();
+    console.log(data);
+    next();
+});
+
+export const Movie = model<IMovieDocument, IMovieModel>('movies', movieSchema);
