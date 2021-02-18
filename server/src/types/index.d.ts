@@ -23,3 +23,8 @@ export interface IJwt extends IUser {
     iss: string;
     sub: string;
 }
+
+export interface RequestBody<T> extends Request {
+    body: T;
+    user: IUser;
+}
