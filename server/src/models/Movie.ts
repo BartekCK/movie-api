@@ -23,7 +23,7 @@ const movieSchema = new Schema(
         genre: { type: String, trim: true },
         director: { type: String, trim: true },
     },
-    { timestamps: true },
+    { timestamps: { createdAt: true, updatedAt: false } },
 );
 
 export default model<IMovieDocument, IMovieModel>('movies', movieSchema);

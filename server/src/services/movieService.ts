@@ -5,7 +5,7 @@ import Movie, { IMovieDocument } from '../models/Movie';
 import { IMovieDTO } from '../dto';
 
 const movieService = {
-    createNewBook: async (user: IUser, bookTitle?: string): Promise<IMovieDTO> => {
+    createNewMovie: async (user: IUser, bookTitle?: string): Promise<IMovieDTO> => {
         if (!bookTitle) {
             throw { name: SystemError.BadRequest, message: `${user.name} you should add movie title` };
         }
@@ -15,7 +15,13 @@ const movieService = {
         return <IMovieDTO>movieDoc.toObject({ versionKey: false });
     },
 
-    getAllBooks: (user: IUser) => {},
+    getAllUserMovies: async (userId: number): Promise<IMovieDTO[]> => {
+        const movies: IMovieDocument[] = await Movie.find({ userId }).select('-__v -createdAt').exec();
+        if (movies.length === 0) {
+            throw { name: SystemError.NotFound, message: `User by Id ${userId} don't have any movies` };
+        }
+        return movies.map((movie: IMovieDocument) => ({...movie.toObject()} as IMovieDTO));
+    },
 };
 
 export default movieService;

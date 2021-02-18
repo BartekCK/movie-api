@@ -1,12 +1,11 @@
-import { IMovie } from '../types';
+import { idType, IMovie } from '../types';
 
 export interface IMovieCreateDTO {
     title: string;
 }
 
 export interface IMovieDTO extends IMovie {
-    "_id": string
-    "userId": number,
-    "createdAt": string
-    "updatedAt": string
+    _id: idType;
+    userId: number;
+    createdAt: string;
 }
