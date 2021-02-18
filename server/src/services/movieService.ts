@@ -1,9 +1,16 @@
+// helpers
+import movieHelper from '../helpers/movieHelper';
+
+// models
+import { IMovieDocument, Movie } from '../models/Movie';
+
+// classes
+import { CustomError } from '../utils/CustomError';
+
+// types
 import { IMovie, IUser } from '../types';
 import { SystemError } from '../types/enums';
-import movieHelper from '../helpers/movieHelper';
-import { IMovieDocument, Movie } from '../models/Movie';
 import { IMovieDTO } from '../dto';
-import { CustomError } from '../utils/CustomError';
 
 const movieService = {
     createNewMovie: async (user: IUser, bookTitle?: string): Promise<IMovieDTO> => {

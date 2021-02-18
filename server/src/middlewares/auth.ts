@@ -1,12 +1,22 @@
 import passport from 'passport';
 import { ExtractJwt, Strategy as JwtStrategy, VerifiedCallback } from 'passport-jwt';
 import dotenv from 'dotenv';
-import { IJwt, IUser, RequestBody } from '../types';
+
+// models
 import { Movie } from '../models/Movie';
-import { SystemError, UserRole } from '../types/enums';
+
+// utils
 import newCleanDateBuilder from '../utils/cleanDateBuilder';
-import { MONTH_LIMIT_BASIC_USER } from '../constansts';
+
+// constants
+import { MONTH_LIMIT_BASIC_USER } from '../constants';
+
+// classes
 import { CustomError } from '../utils/CustomError';
+
+// types
+import { IJwt, IUser, RequestBody } from '../types';
+import { SystemError, UserRole } from '../types/enums';
 
 dotenv.config();
 

@@ -1,8 +1,12 @@
 import { Response } from 'express';
+
+// services
+import movieService from '../services/movieService';
+
+// types
+import { HttpStatus } from '../types/enums';
 import { RequestBody } from '../types';
 import { IMovieCreateDTO, IMovieDTO } from '../dto';
-import movieService from '../services/movieService';
-import { HttpStatus } from '../types/enums';
 
 const movieController = {
     createNewUserMoviePOST: async (req: RequestBody<IMovieCreateDTO>, res: Response) => {

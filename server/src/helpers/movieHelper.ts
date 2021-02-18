@@ -1,7 +1,11 @@
 import axios from 'axios';
+
+// classes
+import { CustomError } from '../utils/CustomError';
+
+// types
 import { SystemError } from '../types/enums';
 import { IMovie } from '../types';
-import { CustomError } from '../utils/CustomError';
 
 const movieHelper = {
     findMovieInOuterAPI: async (title: string): Promise<IMovie> => {

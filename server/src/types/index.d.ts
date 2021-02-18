@@ -1,5 +1,7 @@
-import { UserRole } from './enums';
 import { Schema } from 'mongoose';
+
+// types
+import { UserRole } from './enums';
 
 export type idType = string | Schema.Types.ObjectId | undefined;
 

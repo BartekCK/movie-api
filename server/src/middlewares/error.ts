@@ -1,4 +1,6 @@
 import { Request, Response } from 'express';
+
+// types
 import { HttpStatus, SystemError } from '../types/enums';
 
 const errorMiddleware = (err: any, req: Request, res: Response, next: any) => {

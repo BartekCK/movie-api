@@ -1,4 +1,6 @@
 import { Document, model, Model, Schema } from 'mongoose';
+
+// types
 import { IMovie } from '../types';
 
 export interface IMovieDocument extends Document, IMovie {

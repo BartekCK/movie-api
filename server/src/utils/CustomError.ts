@@ -1,3 +1,4 @@
+// types
 import { SystemError } from '../types/enums';
 
 export class CustomError extends Error {

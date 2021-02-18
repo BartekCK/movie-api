@@ -1,3 +1,4 @@
+// types
 import { idType, IMovie } from '../types';
 
 export interface IMovieCreateDTO {
