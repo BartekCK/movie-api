@@ -12,6 +12,7 @@ import { createToken } from '../../src/utils/tokenManage';
 
 // mock
 import { BasicUser } from '../../src/mock/users.mock';
+import mongoose from 'mongoose';
 
 describe('Test auth with bearer token', () => {
     const makeRequest = async (token: string): Promise<{ status: number }> => {

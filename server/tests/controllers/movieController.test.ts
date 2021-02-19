@@ -71,19 +71,21 @@ describe('POST http action on /movies', () => {
     });
 
     it('Should get all user movies', async () => {
+        await addUserMoviesIntoDb(BasicUser, [movieTitle]);
         const { body, status } = await makeGetApiCall<IMovieDTO[]>(BasicUser);
         expect(status).equal(200);
         expect(body.length).equal(1);
     });
 
     it('Should not add the same user movie', async () => {
+        await addUserMoviesIntoDb(BasicUser, [movieTitle]);
         const { status } = await makePostApiCall(BasicUser, movieTitle);
         expect(status).equal(409);
     });
 
     it('Should not allow add more then 5 books basic user and return forbidden', async function () {
         this.timeout(5000);
-        const movies: string[] = ['Joker', 'Parasite', 'The Godfather', 'La Dolce Vita'];
+        const movies: string[] = ['Avatar', 'Joker', 'Parasite', 'The Godfather', 'La Dolce Vita'];
         await addUserMoviesIntoDb(BasicUser, movies);
 
         const { status } = await makePostApiCall(BasicUser, 'The Dark Knight');
@@ -105,8 +107,17 @@ describe('POST http action on /movies', () => {
         expect(userMovies.length).equal(7);
     });
 
+    afterEach(async () => {
+        const collections = mongoose.connection.collections;
+        for (const key in collections) {
+            const collection = collections[key];
+            await collection.deleteMany({});
+        }
+    });
+
     after(async () => {
-        await mongoose.disconnect();
+        await mongoose.connection.dropDatabase();
+        await mongoose.connection.close();
         await mongoServer.stop();
     });
 });

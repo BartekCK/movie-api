@@ -13,11 +13,11 @@ import { SystemError } from '../types/enums';
 import { IMovieDTO } from '../dto';
 
 const movieService = {
-    createNewMovie: async (user: IUser, bookTitle?: string): Promise<IMovieDTO> => {
-        if (!bookTitle) {
+    createNewMovie: async (user: IUser, movieTitle?: string): Promise<IMovieDTO> => {
+        if (!movieTitle) {
             throw new CustomError(SystemError.BadRequest, `${user.name} you should add movie title`);
         }
-        const movie: IMovie = await movieHelper.findMovieInOuterAPI(bookTitle);
+        const movie: IMovie = await movieHelper.findMovieInOuterAPI(movieTitle);
         const movieDoc: IMovieDocument = new Movie({ userId: user.userId, ...movie });
         await movieDoc.save();
         return movieHelper.mapMovieDocumentToDto(movieDoc);

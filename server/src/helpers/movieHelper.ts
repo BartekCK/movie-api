@@ -15,7 +15,7 @@ const movieHelper = {
         const EXTERNAL_API_URL: string | undefined = process.env.EXTERNAL_API_URL;
 
         if (!API_KEY_OMDb) {
-            throw new CustomError(SystemError.EnvError, ' Declare OMDb API key');
+            throw new CustomError(SystemError.EnvError, 'Declare OMDb API key');
         }
         if (!EXTERNAL_API_URL) {
             throw new CustomError(SystemError.EnvError, 'Define external API URL');
