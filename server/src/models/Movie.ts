@@ -1,7 +1,9 @@
-import { Document, model, Model, Schema } from 'mongoose';
+import { Document, HookNextFunction, model, Model, Schema } from 'mongoose';
 
 // types
 import { IMovie } from '../types';
+import { CustomError } from '../utils/CustomError';
+import { SystemError } from '../types/enums';
 
 export interface IMovieDocument extends Document, IMovie {
     userId: number;
@@ -26,7 +28,15 @@ const movieSchema = new Schema(
         genre: { type: String, trim: true },
         director: { type: String, trim: true },
     },
-    { timestamps: { createdAt: true, updatedAt: false } },
+    { timestamps: { createdAt: true, updatedAt: false }, versionKey: false },
 );
+
+movieSchema.pre<IMovieDocument>('save', async function (next: HookNextFunction) {
+    const movie = await Movie.findOne({ userId: this.userId, title: this.title }).exec();
+    if (!movie) {
+        return next();
+    }
+    next(new CustomError(SystemError.Conflict, `User with id ${this.userId} has this movie in his collection`));
+});
 
 export const Movie = model<IMovieDocument, IMovieModel>('movies', movieSchema);

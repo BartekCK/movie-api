@@ -8,5 +8,4 @@ export interface IMovieCreateDTO {
 export interface IMovieDTO extends IMovie {
     _id: idType;
     userId: number;
-    createdAt: Date;
 }

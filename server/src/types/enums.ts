@@ -9,6 +9,7 @@ export enum SystemError {
     Forbidden = 'Forbidden',
     Unauthorized = 'Unauthorized',
     BadRequest = 'BadRequest',
+    Conflict = 'Conflict',
 }
 
 export enum HttpStatus {
@@ -19,6 +20,7 @@ export enum HttpStatus {
     Unauthorized = 401,
     Forbidden = 403,
     NotFound = 404,
+    Conflict = 409,
 
     InternalServerError = 500,
 }

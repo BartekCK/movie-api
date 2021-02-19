@@ -53,7 +53,7 @@ export const checkRoles = async (req: RequestBody<any>, res: any, next: any) => 
     }
 
     const numberOfUserMovies: number = await Movie.find({ userId, createdAt: { $gte: start, $lt: end } })
-        .count()
+        .countDocuments()
         .exec();
 
     if (numberOfUserMovies < MONTH_LIMIT_BASIC_USER) {

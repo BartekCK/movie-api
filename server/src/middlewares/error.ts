@@ -6,8 +6,8 @@ import { HttpStatus, SystemError } from '../types/enums';
 const errorMiddleware = (err: any, req: Request, res: Response, next: any) => {
     const { message, type } = err;
     switch (true) {
-        case type === SystemError.EnvError:
-            return res.status(HttpStatus.InternalServerError).send({ message });
+        case type === SystemError.Conflict:
+            return res.status(HttpStatus.Conflict).send({ message });
 
         case type === SystemError.NotFound:
             return res.status(HttpStatus.NotFound).send({ message });

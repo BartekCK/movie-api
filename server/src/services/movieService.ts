@@ -20,15 +20,15 @@ const movieService = {
         const movie: IMovie = await movieHelper.findMovieInOuterAPI(bookTitle);
         const movieDoc: IMovieDocument = new Movie({ userId: user.userId, ...movie });
         await movieDoc.save();
-        return <IMovieDTO>movieDoc.toObject({ versionKey: false });
+        return movieHelper.mapMovieDocumentToDto(movieDoc);
     },
 
     getAllUserMovies: async (userId: number): Promise<IMovieDTO[]> => {
-        const movies: IMovieDocument[] = await Movie.find({ userId }).select('-__v -createdAt').exec();
+        const movies: IMovieDocument[] = await Movie.find({ userId }).select('-createdAt').exec();
         if (movies.length === 0) {
             throw new CustomError(SystemError.NotFound, `User by Id ${userId} don't have any movies`);
         }
-        return movies.map((movie: IMovieDocument) => ({ ...movie.toObject() } as IMovieDTO));
+        return movies.map(movieHelper.mapMovieDocumentToDto);
     },
 };
 
