@@ -24,3 +24,5 @@ server.use(errorMiddleware);
 server.listen(PORT, () => {
     console.log(`App started on port ${PORT}`);
 });
+
+export default server;
