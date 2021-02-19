@@ -1,11 +1,16 @@
 import express, { Express } from 'express';
-import dotenv from 'dotenv';
-import { connectToDatabase } from './config/database';
-import defineRouting from './config/routes';
-import errorMiddleware from './middlewares/error';
 import morgan from 'morgan';
-
+import dotenv from 'dotenv';
 dotenv.config();
+
+// config
+import { connectToDatabase } from './config/database';
+
+// routes
+import defineRouting from './config/routes';
+
+// middlewares
+import errorMiddleware from './middlewares/error';
 
 const server: Express = express();
 
