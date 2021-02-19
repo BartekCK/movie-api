@@ -17,7 +17,3 @@ export const createToken = (user: IUser): string => {
         expiresIn: 30 * 60,
     });
 };
-
-export const decodeToken = (token: string): any => {
-    return jwt.decode(token);
-};

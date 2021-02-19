@@ -8,6 +8,9 @@ const { MONGO_INITDB_ROOT_USERNAME, MONGO_INITDB_ROOT_PASSWORD, DATABASE, DATABA
 const databaseUrl: string = `mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE}`;
 
 const connectToDatabase = async (): Promise<void> => {
+    if (process.env.NODE_ENV === 'test') {
+        return;
+    }
     await mongoose.connect(databaseUrl, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -17,8 +20,4 @@ const connectToDatabase = async (): Promise<void> => {
     console.log('Successfully connected with database');
 };
 
-const closeDbConnection = async (): Promise<void> => {
-    await mongoose.connection.close();
-};
-
-export { connectToDatabase, closeDbConnection };
+export { connectToDatabase };

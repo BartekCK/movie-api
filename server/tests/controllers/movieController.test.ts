@@ -1,14 +1,19 @@
 import { expect } from 'chai';
 import request from 'supertest';
 import server from '../../src/server';
-import { closeDbConnection, connectToDatabase } from '../../src/config/database';
 import { API_MAIN_ROUTE } from '../../src/constants';
-import { createToken, decodeToken } from '../../src/utils/tokenManage';
+import { createToken } from '../../src/utils/tokenManage';
 import { BasicUser } from '../../src/mock/users.mock';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+import mongoose from 'mongoose';
 
 describe('POST /movies', () => {
+    let mongoServer: MongoMemoryServer;
+
     before(async () => {
-        await connectToDatabase();
+        mongoServer = new MongoMemoryServer();
+        const mongoUri = await mongoServer.getUri();
+        await mongoose.connect(mongoUri);
     });
 
     it('checking default options', async () => {
@@ -17,6 +22,7 @@ describe('POST /movies', () => {
     });
 
     after(async () => {
-        await closeDbConnection();
+        await mongoose.disconnect();
+        await mongoServer.stop();
     });
 });

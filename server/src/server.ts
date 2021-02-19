@@ -22,6 +22,7 @@ connectToDatabase();
 server.use(errorMiddleware);
 
 server.listen(PORT, () => {
+    console.log(`APP MODE ${process.env.NODE_ENV}`);
     console.log(`App started on port ${PORT}`);
 });
 
