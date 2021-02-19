@@ -6,6 +6,7 @@ import { createToken } from '../../src/utils/tokenManage';
 import { BasicUser } from '../../src/mock/users.mock';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
+import { dbOptions } from '../../src/config/database';
 
 describe('POST /movies', () => {
     let mongoServer: MongoMemoryServer;
@@ -13,7 +14,7 @@ describe('POST /movies', () => {
     before(async () => {
         mongoServer = new MongoMemoryServer();
         const mongoUri = await mongoServer.getUri();
-        await mongoose.connect(mongoUri);
+        await mongoose.connect(mongoUri, dbOptions);
     });
 
     it('checking default options', async () => {
