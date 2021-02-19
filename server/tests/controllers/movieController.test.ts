@@ -4,7 +4,7 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 
 // server
-import server from '../../src/server';
+import { server } from '../../src/server';
 
 // constants
 import { API_MAIN_ROUTE } from '../../src/constants';
@@ -35,7 +35,7 @@ describe('POST http action on /movies', () => {
         return request(server).get(`${API_MAIN_ROUTE}/movies`).auth(token, { type: 'bearer' });
     };
 
-    const makePostApiCall = async <T>(user: IUser, title: string): Promise<{ body: T; status: number }> => {
+    const makePostApiCall = async <T>(user: IUser, title?: string): Promise<{ body: T; status: number }> => {
         const token = createToken(user);
         return request(server).post(`${API_MAIN_ROUTE}/movies`).send({ title }).auth(token, { type: 'bearer' });
     };
@@ -57,6 +57,11 @@ describe('POST http action on /movies', () => {
         const { body, status } = await makeGetApiCall(BasicUser);
         expect(status).equal(404);
         expect(body).to.have.property('message');
+    });
+
+    it('Should return 400 status (bad request) when user send request without title', async () => {
+        const { status } = await makePostApiCall<IMovieDTO>(BasicUser);
+        expect(status).equal(400);
     });
 
     it('Should add user movie', async () => {
@@ -119,5 +124,6 @@ describe('POST http action on /movies', () => {
         await mongoose.connection.dropDatabase();
         await mongoose.connection.close();
         await mongoServer.stop();
+        server.close();
     });
 });

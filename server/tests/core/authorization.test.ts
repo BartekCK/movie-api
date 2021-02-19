@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import request from 'supertest';
 
 // server
-import server from '../../src/server';
+import { server } from '../../src/server';
 
 // constants
 import { API_MAIN_ROUTE } from '../../src/constants';
@@ -12,7 +12,6 @@ import { createToken } from '../../src/utils/tokenManage';
 
 // mock
 import { BasicUser } from '../../src/mock/users.mock';
-import mongoose from 'mongoose';
 
 describe('Test auth with bearer token', () => {
     const makeRequest = async (token: string): Promise<{ status: number }> => {
@@ -34,5 +33,9 @@ describe('Test auth with bearer token', () => {
         const token = createToken(BasicUser, 100, 'testsecret');
         const { status } = await makeRequest(token);
         expect(status).equal(401);
+    });
+
+    after(() => {
+        server.close();
     });
 });
