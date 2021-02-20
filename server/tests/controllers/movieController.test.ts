@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import request from 'supertest';
-import { MongoMemoryServer } from 'mongodb-memory-server';
+import { MongoMemoryServer, MongoBinary } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 
 // server
@@ -26,7 +26,7 @@ import { IMovieDTO } from '../../src/dto';
 import { IUser } from '../../src/types';
 
 describe('POST http action on /movies', () => {
-    const mongoServer: MongoMemoryServer = new MongoMemoryServer();
+    let mongoServer: MongoMemoryServer;
 
     const movieTitle: string = 'Avatar';
 
@@ -49,6 +49,7 @@ describe('POST http action on /movies', () => {
     };
 
     before(async () => {
+        mongoServer = new MongoMemoryServer();
         const mongoUri = await mongoServer.getUri();
         await mongoose.connect(mongoUri, dbOptions);
     });
@@ -121,7 +122,6 @@ describe('POST http action on /movies', () => {
     });
 
     after(async () => {
-        await mongoose.connection.dropDatabase();
         await mongoose.connection.close();
         await mongoServer.stop();
         server.close();

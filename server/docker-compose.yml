@@ -3,9 +3,27 @@ services:
   db:
     image: mongo
     restart: always
-    container_name: mongo_db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
+    container_name: mongodb
+    env_file: .env
     ports:
       - 27017:27017
+    networks:
+      - myownnetwork
+  backend:
+    image: api:v1.0
+    container_name: backend
+    build: ./
+    restart: always
+    env_file: .env
+    environment:
+      DATABASE_HOST: mongodb
+    depends_on:
+      - db
+    ports:
+      - published: ${APP_PORT:-8080}
+        target: 8080
+    networks:
+      - myownnetwork
+networks:
+  myownnetwork:
+    driver: bridge
