@@ -89,7 +89,7 @@ describe('POST http action on /movies', () => {
         expect(status).equal(409);
     });
 
-    it('Should not allow add more then 5 books basic user and return forbidden', async function () {
+    it('Should not allow add more then 5 movies basic user and return forbidden', async function () {
         this.timeout(5000);
         const movies: string[] = ['Avatar', 'Joker', 'Parasite', 'The Godfather', 'La Dolce Vita'];
         await addUserMoviesIntoDb(BasicUser, movies);
@@ -101,7 +101,7 @@ describe('POST http action on /movies', () => {
         expect(userMovies.length).equal(5);
     });
 
-    it('Should allow add more then 5 books premium user', async function () {
+    it('Should allow add more then 5 movies premium user', async function () {
         this.timeout(5000);
         const movies: string[] = ['Joker', 'Parasite', 'The Godfather', 'La Dolce Vita', 'The Dig', 'Jaws'];
         await addUserMoviesIntoDb(PremiumUser, movies);
