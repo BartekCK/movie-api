@@ -15,11 +15,12 @@ const dbOptions = {
 };
 
 const connectToDatabase = async (): Promise<void> => {
-    if (process.env.NODE_ENV === 'test') {
-        return;
+    try{
+        await mongoose.connect(databaseUrl, dbOptions);
+        console.log("Successfully connected with database");
+    }catch (e) {
+        console.log(e)
     }
-    await mongoose.connect(databaseUrl, dbOptions);
-    console.log('Successfully connected with database');
 };
 
 export { connectToDatabase, dbOptions };

@@ -23,7 +23,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 defineRouting(app);
-connectToDatabase();
+
+if (process.env.NODE_ENV !== 'test') {
+    connectToDatabase();
+}
 
 app.use(errorMiddleware);
 
