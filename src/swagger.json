@@ -1,0 +1,163 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Movie Api",
+    "description": "Api for user movies",
+    "version": "1.0.0",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "contact": {
+      "name": "Bartłomiej Kotarski",
+      "email": "bkotarski1@gmail.com"
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "in": "header",
+      "type": "apiKey",
+      "description": "Fot auth use paste this patern: \"Bearer XXXX\" - XXXX js JWT",
+      "name": "Authorization"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/api/v1",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "Movies",
+      "description": "Auth actions with movies"
+    }
+  ],
+  "paths": {
+    "/movies": {
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "security": [{
+          "Bearer": []
+        }],
+        "summary": "Get all user movies",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MovieDTO"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found user books"
+          }
+        }
+      },
+      "post": {
+        "summary": "Add book for user",
+        "tags": [
+          "Movies"
+        ],
+        "security": [{
+          "Bearer": []
+        }],
+        "description": "Add new book for user",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Movie title",
+            "schema": {
+              "$ref": "#/definitions/MovieCreateDTO"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/MovieDTO"
+            }
+          },
+          "400": {
+            "description": "Bad request when title is undefined",
+            "schema": {
+              "$ref": "#/definitions/ErrorType"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden - Basic user added 5 movies in this month",
+            "schema": {
+              "$ref": "#/definitions/ErrorType"
+            }
+          },
+          "404": {
+            "description": "Movie not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorType"
+            }
+          },
+          "409": {
+            "description": "User have this book in db",
+            "schema": {
+              "$ref": "#/definitions/ErrorType"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorType": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "MovieCreateDTO": {
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "MovieDTO": {
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "number"
+        },
+        "title": {
+          "type": "string"
+        },
+        "released": {
+          "type": "string"
+        },
+        "genre": {
+          "type": "string"
+        },
+        "director": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
