@@ -17,11 +17,10 @@
     "Bearer": {
       "in": "header",
       "type": "apiKey",
-      "description": "Fot auth use paste this patern: \"Bearer XXXX\" - XXXX js JWT",
+      "description": "For auth use paste this patern: \"Bearer XXXX\" - XXXX js JWT",
       "name": "Authorization"
     }
   },
-  "host": "localhost:8080",
   "basePath": "/api/v1",
   "schemes": [
     "http"
@@ -44,34 +43,39 @@
         "tags": [
           "Movies"
         ],
-        "security": [{
-          "Bearer": []
-        }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "summary": "Get all user movies",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/MovieDTO"
+              "$ref": "#/definitions/MovieDTO",
+              "type": "array"
             }
           },
           "401": {
             "description": "Unauthorized"
           },
           "404": {
-            "description": "Not found user books"
+            "description": "Not found user movies"
           }
         }
       },
       "post": {
-        "summary": "Add book for user",
+        "summary": "Add movie for user",
         "tags": [
           "Movies"
         ],
-        "security": [{
-          "Bearer": []
-        }],
-        "description": "Add new book for user",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "description": "Add new movie for user",
         "parameters": [
           {
             "in": "body",
@@ -98,7 +102,7 @@
             "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden - Basic user added 5 movies in this month",
+            "description": "Forbidden - Basic user can add only 5 movies on month",
             "schema": {
               "$ref": "#/definitions/ErrorType"
             }
@@ -110,7 +114,7 @@
             }
           },
           "409": {
-            "description": "User have this book in db",
+            "description": "User have this movie in db",
             "schema": {
               "$ref": "#/definitions/ErrorType"
             }
