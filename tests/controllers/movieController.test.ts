@@ -25,7 +25,7 @@ import movieService from '../../src/services/movieService';
 import { IMovieDTO } from '../../src/dto';
 import { IUser } from '../../src/types';
 
-describe('POST http action on /movies', () => {
+describe('Http actions on /movies', () => {
     let mongoServer: MongoMemoryServer;
 
     const movieTitle: string = 'Avatar';
@@ -83,7 +83,7 @@ describe('POST http action on /movies', () => {
         expect(body.length).equal(1);
     });
 
-    it('Should not add the same user movie', async () => {
+    it('Should forbidden adding the same movie for user and return 409 status (conflict)', async () => {
         await addUserMoviesIntoDb(BasicUser, [movieTitle]);
         const { status } = await makePostApiCall(BasicUser, movieTitle);
         expect(status).equal(409);
