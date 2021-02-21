@@ -81,18 +81,20 @@ Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQzNCwibmFtZSI6IlByZW1p
 ![alt text](https://ucad09dd9e390377755e5971de85.previews.dropboxusercontent.com/p/thumb/ABGWxnWTGsKrJUpJAdRqVAfrfoqVYNT4eozfbIauh29db-TaqYC-x4c2ZLzNf3uxzDeEIcKMdDInsqyeFYY6Jm2nGwlMO8LAUBzFYK_CR5UL5x-Y4dHWA5A6MDmmfV9zJBiSyKLEuRMJa7mbqZrsUgndH4RspuvR59KJuleaIAnVM4qXXaODDKwpXCQbAXACVWv4Rjczx-RG0IOurt0KG3IfRZCSWu4JcuNQ35S9ftSCoNJVku2oQ2KrDUJtU9mirkIxaSxw3hJpoMimYqjLagXw2L8ABkJqunIxbXP5qEQ_F72lgWgdMpyCbmwifr5ytqY1JmdurOI9Z8seCSfxgwFKZZjL2BdUi2iLeyssBQMRhZRKU3RGbPU_2ZUfpJcsL1VyFCuH8I6_IevPEvxmbsKu/p.png?fv_content=true&size_mode=5)
 
 ## GET request
+- [x] Fetch a list of all movies created by an authorized user
+- [x] Return 404 if user don't have any movies
 
 ```
 http://localhost:8080/api/v1/movies
 ```
 
-return auth user books. Example curl:
+return auth user movies. Example curl:
 
 ```
 curl -X GET "http://localhost:8080/api/v1/movies" -H  "accept: application/json" -H  "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQzNCwibmFtZSI6IlByZW1pdW0gSmltIiwicm9sZSI6InByZW1pdW0iLCJpYXQiOjE2MTM4NTc4NTMsImV4cCI6MTYxMzg1OTY1MywiaXNzIjoiaHR0cHM6Ly93d3cubmV0Z3VydS5jb20vIiwic3ViIjoiNDM0In0.GZqNVfaRkexvnAbdBlXAP6Ojh8-r1IChTmqZmd3GL4E"
 ```
 
-Response:
+200 Response:
 
 ```json
 [
@@ -107,7 +109,25 @@ Response:
 ]
 ```
 
+401 Response:<br />
+`Details: Unauthorized`<br />
+
+404 Response:
+```json
+{
+  "message": "User by Id 123 don't have any movies"
+}
+```
 ## POST request
+
+- [x] Basic users are restricted to create a 5 movies per a month (calendar month)
+- [x] Premium users have no limits
+- [x] Title in body can't be undefined
+- [x] User can't add the same movie
+- [x] User must be authorized
+- [x] Additional data about a movie is fetch from OMDb API
+- [x] Authorization is with Bearer token in header
+
 
 ```
 http://localhost:8080/api/v1/movies
@@ -119,8 +139,7 @@ For save user movie make POST request. Example curl:
 curl -X POST "http://localhost:8080/api/v1/movies" -H  "accept: application/json" -H  "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQzNCwibmFtZSI6IlByZW1pdW0gSmltIiwicm9sZSI6InByZW1pdW0iLCJpYXQiOjE2MTM4NTc4NTMsImV4cCI6MTYxMzg1OTY1MywiaXNzIjoiaHR0cHM6Ly93d3cubmV0Z3VydS5jb20vIiwic3ViIjoiNDM0In0.GZqNVfaRkexvnAbdBlXAP6Ojh8-r1IChTmqZmd3GL4E" -H  "Content-Type: application/json" -d "{  \"title\": \"The Godfather\"}"
 ```
 
-Response:
-
+201 Response:
 ```json
 {
   "_id": "603184f9f3bf7b0019df2250",
@@ -129,6 +148,32 @@ Response:
   "released": "1972-03-24T00:00:00.000Z",
   "genre": "Crime, Drama",
   "director": "Francis Ford Coppola"
+}
+```
+400 Response:
+```json
+{
+  "message": "Basic Thomas you should add movie title"
+}
+```
+401 Response:<br />
+`Details: Unauthorized`<br />
+403 Response:
+```json
+{
+  "message": "User Basic Thomas with basic account can add only 5 movies on month"
+}
+```
+403 Response:
+```json
+{
+  "message": "Movie not found!"
+}
+```
+409 Response:
+```json
+{
+  "message": "User with id 123 has this movie in his collection"
 }
 ```
 
