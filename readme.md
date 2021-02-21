@@ -62,7 +62,7 @@ npm test
 
 # CI/CD
 
-App has working CI/CD pipeline that runs the tests. In GitHub [`Pull requests`](https://github.com/BartekCK/movie-api/pulls) tab you can find examples with a pipeline.
+App has working CI/CD pipeline that runs the tests. In GitHub [Pull requests](https://github.com/BartekCK/movie-api/pulls) tab you can find examples with a pipeline.
 
 # API docs
 
