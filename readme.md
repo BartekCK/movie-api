@@ -33,7 +33,7 @@ You need to have `MongoDB` instance on your OS. You can also run app locally but
 docker-compose up -d db
 ```
 
-All **ENV** you can find in *./env*
+All **ENV** you can find in [*./env*](/.env)
 
 If the database exists and **ENV's** are fine, then you can install dependencies and run app in `production` or `developer` mode.
 
@@ -62,12 +62,12 @@ npm test
 
 # CI/CD
 
-App has working CI/CD pipeline that runs the tests. In GitHub `Pull requests` tab you can find examples with a pipeline.
+App has working CI/CD pipeline that runs the tests. In GitHub [`Pull requests`](https://github.com/BartekCK/movie-api/pulls) tab you can find examples with a pipeline.
 
 # API docs
 
 You can see API documentation with `swagger` after starting the application, on URL
-`http://localhost:8080/docs/`.
+[`http://localhost:8080/docs/`](http://localhost:8080/docs/).
 
 ![alt text](https://uc68ec6c813baa10a2ce91d0a9af.previews.dropboxusercontent.com/p/thumb/ABFdSSDg4bDpcrp-qkx57xMQhrG2nAHriV5-aAvsrSUvodbY7eamp8R6ne8K1JBE_B8tGMNaG_Kc1jOrOEbc2tn3SM1ZuwnESXUY3YeDUW_ztEB-NjUEMQHmwETWUjb8__2JW4CmACsk-z8uMBEkvK71LqaOsaBsZ4HI353RqYOzgO32YXQGoE4txj-UtXRTKcprak_0XiEqKkPhpOuMuhXb0SRYSS73M8IQu_Hw_LU-USLhZe57EJkkTOTE9KzJRzcFyynhUTmcI-NRYKqsyfpO40adiBJ_YEwt14_oDAUCMxyIYkkMRqcuxexYJD48OTYSgN2rvFIN8GFs-eW3dHYTrzWJtNTC_DCXg0hANo-FbdFsy15cJVKkulcrERZmHKbvxrXqTkXttKCvnZF4yxTT/p.png?fv_content=true&size_mode=5)
 For use routes, user should be authorized, you can make it just like the picture below
