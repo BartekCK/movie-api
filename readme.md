@@ -69,7 +69,7 @@ App has working CI/CD pipeline that runs the tests. In GitHub [Pull requests](ht
 You can see API documentation with `swagger` after starting the application, on URL
 [`http://localhost:8080/docs/`](http://localhost:8080/docs/).
 
-![alt text](https://uc68ec6c813baa10a2ce91d0a9af.previews.dropboxusercontent.com/p/thumb/ABFdSSDg4bDpcrp-qkx57xMQhrG2nAHriV5-aAvsrSUvodbY7eamp8R6ne8K1JBE_B8tGMNaG_Kc1jOrOEbc2tn3SM1ZuwnESXUY3YeDUW_ztEB-NjUEMQHmwETWUjb8__2JW4CmACsk-z8uMBEkvK71LqaOsaBsZ4HI353RqYOzgO32YXQGoE4txj-UtXRTKcprak_0XiEqKkPhpOuMuhXb0SRYSS73M8IQu_Hw_LU-USLhZe57EJkkTOTE9KzJRzcFyynhUTmcI-NRYKqsyfpO40adiBJ_YEwt14_oDAUCMxyIYkkMRqcuxexYJD48OTYSgN2rvFIN8GFs-eW3dHYTrzWJtNTC_DCXg0hANo-FbdFsy15cJVKkulcrERZmHKbvxrXqTkXttKCvnZF4yxTT/p.png?fv_content=true&size_mode=5)
+![alt text](https://i.ibb.co/JK8s8yD/Swagger.png)
 For use routes, user should be authorized, you can make it just like the picture below
 (Remember to add prefix **Bearer** and than **JWT**)<br />
 **Example:**
@@ -78,7 +78,7 @@ For use routes, user should be authorized, you can make it just like the picture
 Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQzNCwibmFtZSI6IlByZW1pdW0gSmltIiwicm9sZSI6InByZW1pdW0iLCJpYXQiOjE2MTM4NTc4NTMsImV4cCI6MTYxMzg1OTY1MywiaXNzIjoiaHR0cHM6Ly93d3cubmV0Z3VydS5jb20vIiwic3ViIjoiNDM0In0.GZqNVfaRkexvnAbdBlXAP6Ojh8-r1IChTmqZmd3GL4E
 ```
 
-![alt text](https://ucad09dd9e390377755e5971de85.previews.dropboxusercontent.com/p/thumb/ABGWxnWTGsKrJUpJAdRqVAfrfoqVYNT4eozfbIauh29db-TaqYC-x4c2ZLzNf3uxzDeEIcKMdDInsqyeFYY6Jm2nGwlMO8LAUBzFYK_CR5UL5x-Y4dHWA5A6MDmmfV9zJBiSyKLEuRMJa7mbqZrsUgndH4RspuvR59KJuleaIAnVM4qXXaODDKwpXCQbAXACVWv4Rjczx-RG0IOurt0KG3IfRZCSWu4JcuNQ35S9ftSCoNJVku2oQ2KrDUJtU9mirkIxaSxw3hJpoMimYqjLagXw2L8ABkJqunIxbXP5qEQ_F72lgWgdMpyCbmwifr5ytqY1JmdurOI9Z8seCSfxgwFKZZjL2BdUi2iLeyssBQMRhZRKU3RGbPU_2ZUfpJcsL1VyFCuH8I6_IevPEvxmbsKu/p.png?fv_content=true&size_mode=5)
+![alt text](https://i.ibb.co/SBcWzZh/Swagger-auth.png)
 
 ## GET request
 - [x] Fetch a list of all movies created by an authorized user
