@@ -18,8 +18,12 @@ const connectToDatabase = async (): Promise<void> => {
     if (process.env.NODE_ENV === 'test') {
         return;
     }
-    await mongoose.connect(databaseUrl, dbOptions);
-    console.log('Successfully connected with database');
+    try {
+        await mongoose.connect(databaseUrl, dbOptions);
+        console.log('Successfully connected with database');
+    } catch (e) {
+        console.log(e);
+    }
 };
 
 export { connectToDatabase, dbOptions };
